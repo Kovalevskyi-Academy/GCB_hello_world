@@ -1,0 +1,13 @@
+#steps:
+#  - name: 'gcr.io/cloud-builders/docker'
+#    args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:test', '.' ]
+#images:
+#  - 'us-central1-docker.pkg.dev/prod-rest/quickstart-docker-repo/quickstart-image:test'
+
+timeout: 10s
+
+steps:
+  - name: "alpine"
+    args: ['echo', '$_TEST_ENV']
+substitutions:
+  _TEST_ENV: Hello World from Alpine container in Google Cloud Build.
