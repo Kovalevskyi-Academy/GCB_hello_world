@@ -5,7 +5,7 @@ steps:
     # (Artifact Registry) us-central1-docker.pkg.dev
     args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/helloWorld:test', '.' ]
     images:
-      - 'us-central1-docker.pkg.dev/prod-rest/quickstart-docker-repo/quickstart-image:test'
+      - 'us-central1-docker.pkg.dev/prod-rest/quickstart-docker-repo/helloWorld:test'
 # example 2
   - name: "alpine"
     args: ['echo', '$_TEST_ENV']
