@@ -1,4 +1,4 @@
-#timeout: 20s
+timeout: 120s
 substitutions:
   _REGION: 'europe-docker.pkg.dev'
 
