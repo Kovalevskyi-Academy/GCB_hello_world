@@ -16,6 +16,7 @@ steps:
             '-f', 'Dockerfile',
             '.' ]
 
+
 images:
   - '${_REGION}/${PROJECT_ID}/rest-api/hello_world:$SHORT_SHA'
   - '${_REGION}/${PROJECT_ID}/rest-api/hello_world:latest'
