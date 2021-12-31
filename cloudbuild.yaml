@@ -5,9 +5,9 @@ substitutions:
 steps:
 # example 1
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', '${_REGION}/$PROJECT_ID/rest-api/hello_world:test9', '.' ]
+    args: [ 'build', '-t', '${_REGION}/${PROJECT_ID}/rest-api/hello_world:test10', '.' ]
 images:
-  - 'europe-docker.pkg.dev/$PROJECT_ID/rest-api/hello_world:test9'
+  - '${_REGION}/${PROJECT_ID}/rest-api/hello_world:test10'
 
 # example 2
 #  - name: "alpine"
