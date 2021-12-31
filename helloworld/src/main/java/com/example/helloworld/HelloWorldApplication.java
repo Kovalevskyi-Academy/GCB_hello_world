@@ -20,7 +20,7 @@ public class HelloWorldApplication {
   class HelloWorldController {
     @GetMapping("/")
     String hello() {
-      return "Hello " + name + "!!!" + System.lineSeparator();
+      return "Hello " + name + "!!!Trololo!!" + System.lineSeparator();
     }
   }
 

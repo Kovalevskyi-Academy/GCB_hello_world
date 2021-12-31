@@ -13,7 +13,7 @@ steps:
             '-t', '${_REGION}/${PROJECT_ID}/rest-api/hello_world:$SHORT_SHA',
             '-t', '${_REGION}/${PROJECT_ID}/rest-api/hello_world:latest',
             '--cache-from', '${_REGION}/${PROJECT_ID}/rest-api/hello_world:latest',
-
+            '-f', 'Dockerfile',
             '.' ]
 
 images:
