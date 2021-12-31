@@ -3,23 +3,32 @@ substitutions:
   _REGION: 'europe-docker.pkg.dev'
 
 steps:
+  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+    entrypoint: 'mvn'
+    args: ['-v']
+
+
+
+
+
+
 # example 1
-  - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'bash'
-    args: ['-c', 'docker pull ${_REGION}/$PROJECT_ID/rest-api/$REPO_NAME:latest || exit 0']
-
-  - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build',
-            '-t', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:$SHORT_SHA',
-            '-t', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:latest',
-            '--cache-from', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:latest',
-            '-f', 'Dockerfile',
-            '.' ]
-
-
-images:
-  - '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:$SHORT_SHA'
-  - '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:latest'
+#  - name: 'gcr.io/cloud-builders/docker'
+#    entrypoint: 'bash'
+#    args: ['-c', 'docker pull ${_REGION}/$PROJECT_ID/rest-api/$REPO_NAME:latest || exit 0']
+#
+#  - name: 'gcr.io/cloud-builders/docker'
+#    args: [ 'build',
+#            '-t', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:$SHORT_SHA',
+#            '-t', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:latest',
+#            '--cache-from', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:latest',
+#            '-f', 'Dockerfile',
+#            '.' ]
+#
+#
+#images:
+#  - '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:$SHORT_SHA'
+#  - '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:latest'
 
 # example 2
 #  - name: "alpine"
