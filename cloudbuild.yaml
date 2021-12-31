@@ -3,8 +3,8 @@ steps:
 # example 1
   - name: 'gcr.io/cloud-builders/docker'
     args: [ 'build', '-t', 'europe-docker.pkg.dev/$PROJECT_ID/rest-api/hello_world:test4', '.' ]
-#images:
-#  - 'europe-docker.pkg.dev/$PROJECT_ID/rest-api/hello_world:test'
+images:
+  - 'europe-docker.pkg.dev/$PROJECT_ID/rest-api/hello_world:test4'
 
 # example 2
 #  - name: "alpine"
