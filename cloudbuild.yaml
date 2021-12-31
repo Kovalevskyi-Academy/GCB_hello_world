@@ -1,15 +1,14 @@
 timeout: 10s
 steps:
-## example 1
-#  - name: 'gcr.io/cloud-builders/docker'
-#    # (Artifact Registry) us-central1-docker.pkg.dev
-#    args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/helloWorld:test', '.' ]
+# example 1
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', 'europe-docker.pkg.dev/$PROJECT_ID/rest-api/hello_world:test', '.' ]
 #images:
 #  - 'us-central1-docker.pkg.dev/prod-rest/quickstart-docker-repo/helloWorld:test'
 # example 2
-  - name: "alpine"
-    args: ['echo', '$_TEST_ENV']
-substitutions:
-  _TEST_ENV: Hello World from Alpine STEP in Google Cloud Build.
+#  - name: "alpine"
+#    args: ['echo', '$_TEST_ENV']
+#substitutions:
+#  _TEST_ENV: Hello World from Alpine STEP in Google Cloud Build.
 
 
