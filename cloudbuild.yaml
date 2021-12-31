@@ -6,6 +6,10 @@ steps:
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
     entrypoint: 'mvn'
     args: ['-v']
+  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+    entrypoint: 'mvn'
+    args: ['test']
+    dir: 'helloworld'
 
 
 
