@@ -2,7 +2,7 @@ timeout: 10s
 steps:
 # example 1
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'europe-docker.pkg.dev/$PROJECT_ID/rest-api/helloWorld:test', '.' ]
+    args: [ 'build', '-t', 'europe-docker.pkg.dev/$PROJECT_ID/rest-api/hello_world:test', '.' ]
 #images:
 #  - 'us-central1-docker.pkg.dev/prod-rest/quickstart-docker-repo/helloWorld:test'
 # example 2
