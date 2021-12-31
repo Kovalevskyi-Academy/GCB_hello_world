@@ -18,8 +18,8 @@ steps:
 
 
 images:
-  - '${_REGION}/${PROJECT_ID}/rest-api/hello_world:$SHORT_SHA'
-  - '${_REGION}/${PROJECT_ID}/rest-api/hello_world:latest'
+  - '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:$SHORT_SHA'
+  - '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:latest'
 
 # example 2
 #  - name: "alpine"
