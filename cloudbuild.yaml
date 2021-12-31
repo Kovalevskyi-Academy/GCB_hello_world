@@ -10,6 +10,10 @@ steps:
     entrypoint: 'mvn'
     args: ['test']
     dir: 'helloworld'
+  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+    entrypoint: 'mvn'
+    args: ['package', '-Dmaven.test.skip=true']
+    dir: 'helloworld'
 
 
 
