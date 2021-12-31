@@ -1,10 +1,13 @@
-#timeout: 15s
+timeout: 20s
+substitutions:
+  _REGION: 'europe-docker.pkg.dev'
+
 steps:
 # example 1
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'europe-docker.pkg.dev/$PROJECT_ID/rest-api/hello_world:test8', '.' ]
+    args: [ 'build', '-t', '${_REGION}/$PROJECT_ID/rest-api/hello_world:test9', '.' ]
 images:
-  - 'europe-docker.pkg.dev/$PROJECT_ID/rest-api/hello_world:test8'
+  - 'europe-docker.pkg.dev/$PROJECT_ID/rest-api/hello_world:test9'
 
 # example 2
 #  - name: "alpine"
