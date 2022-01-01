@@ -8,10 +8,8 @@ substitutions:
 
 steps:
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
-    entrypoint: 'mvn'
-    args: ['-e',
-           "help:evaluate -Dexpression=project.version -q -DforceStdout"]
-    dir: 'helloworld'
+    entrypoint: 'find'
+    args: ['.']
 #  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
 #    entrypoint: 'bash'
 #    args: ['cat _JAR_NAME']
