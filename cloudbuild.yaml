@@ -11,7 +11,7 @@ steps:
     entrypoint: 'mvn'
     args: ['-e',
            '-q',
-           "-Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}'",
+           "-Dexec.executable='/bin/sh -c echo' -Dexec.args='${project.artifactId}-${project.version}'",
            '--non-recursive',
            'exec:exec']
     dir: 'helloworld'
