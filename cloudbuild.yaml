@@ -15,6 +15,11 @@ steps:
     args: ['package', '-Dmaven.test.skip=true']
     dir: 'helloworld'
 
+artifacts:
+  objects:
+    location: 'gs://prod-rest_cloudbuild/hello-world'
+    paths: ['helloworld/target/*.jar']
+
 
 
 
