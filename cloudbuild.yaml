@@ -1,24 +1,37 @@
 timeout: 120s
+
+options:
+  dynamic_substitutions: 'true'
+  substitution_option: 'ALLOW_LOOSE'
 substitutions:
   _REGION: 'europe-docker.pkg.dev'
+  _FILE_NAME: 'null'
 
 steps:
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
-    entrypoint: 'mvn'
-    args: ['-v']
-  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
-    entrypoint: 'mvn'
-    args: ['test']
-    dir: 'helloworld'
-  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
-    entrypoint: 'mvn'
-    args: ['package', '-Dmaven.test.skip=true']
-    dir: 'helloworld'
-
-artifacts:
-  objects:
-    location: 'gs://prod-rest_cloudbuild/hello-world'
-    paths: ['helloworld/target/*.jar']
+    entrypoint: 'bash'
+    args: ['echo ${_FILE_NAME} | exit 0']
+    env:
+      - "${_FILE_NAME}=mvn -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}.jar' --non-recursive exec:exec"
+#  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+#    entrypoint: 'mvn'
+#    args: ['test']
+#    dir: 'helloworld'
+#  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+#    entrypoint: 'mvn'
+#    args: ['package', '-Dmaven.test.skip=true']
+#    dir: 'helloworld'
+#  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+#    entrypoint: 'echo'
+#    args:
+#      - '################'
+#      - '$PROJECT_NUMBER'
+#      - '################'
+#
+#artifacts:
+#  objects:
+#    location: 'gs://prod-rest_cloudbuild/hello-world'
+#    paths: ['helloworld/target/*.jar']
 
 
 
