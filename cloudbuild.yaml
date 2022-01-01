@@ -5,14 +5,14 @@ options:
   substitution_option: 'ALLOW_LOOSE'
 substitutions:
   _REGION: 'europe-docker.pkg.dev'
-  _FILE_NAME: 'null'
 
 steps:
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
     entrypoint: 'bash'
-    args: ['echo ${_FILE_NAME} | exit 0']
-    env:
-      - "${_FILE_NAME}=mvn -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}.jar' --non-recursive exec:exec"
+    args: ["mvn -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}.jar' --non-recursive exec:exec > _JAR_NAME"]
+  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+    entrypoint: 'bash'
+    args: ['cat _JAR_NAME']
 #  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
 #    entrypoint: 'mvn'
 #    args: ['test']
