@@ -5,6 +5,7 @@ options:
   substitution_option: 'ALLOW_LOOSE'
 substitutions:
   _REGION: 'europe-docker.pkg.dev'
+  _ARTIFACT_REPO: 'gs://prod-rest_cloudbuild/hello-world'
 
 steps:
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
@@ -13,33 +14,15 @@ steps:
     dir: 'helloworld'
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
     entrypoint: 'find'
-    args: ['-name', '*.jar']
-#  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
-#    entrypoint: 'bash'
-#    args: ['cat _JAR_NAME']
+    args: ['-name', 'h*.jar', '>', 'artifact_path']
 
 
 
 
-#  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
-#    entrypoint: 'mvn'
-#    args: ['test']
-#    dir: 'helloworld'
-#  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
-#    entrypoint: 'mvn'
-#    args: ['package', '-Dmaven.test.skip=true']
-#    dir: 'helloworld'
-#  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
-#    entrypoint: 'echo'
-#    args:
-#      - '################'
-#      - '$PROJECT_NUMBER'
-#      - '################'
-#
-#artifacts:
-#  objects:
-#    location: 'gs://prod-rest_cloudbuild/hello-world'
-#    paths: ['helloworld/target/*.jar']
+artifacts:
+  objects:
+    location: '${_ARTIFACT_REPO}'
+    paths: ['./helloworld/target/h*.jar']
 
 
 

@@ -9,7 +9,7 @@
 
   <groupId>com.example</groupId>
   <artifactId>helloworld</artifactId>
-  <version>2-SNAPSHOT</version>
+  <version>2.5-SNAPSHOT</version>
   <name>helloworld</name>
   <description>Demo project for Spring Boot</description>
 
