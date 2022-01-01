@@ -8,8 +8,12 @@ substitutions:
 
 steps:
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+    entrypoint: 'mvn'
+    args: [ 'package', '-Dmaven.test.skip=true' ]
+    dir: 'helloworld'
+  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
     entrypoint: 'find'
-    args: ['.']
+    args: [ '.', '-name *.jar']
 #  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
 #    entrypoint: 'bash'
 #    args: ['cat _JAR_NAME']
