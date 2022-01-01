@@ -10,11 +10,7 @@ steps:
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
     entrypoint: 'mvn'
     args: ['-e',
-           '-q',
-           "-Dexec.executable='/bin/sh -c echo'",
-           "-Dexec.args='${project.artifactId}-${project.version}'",
-           '--non-recursive',
-           'exec:exec']
+           "help:evaluate -Dexpression=project.version -q -DforceStdout"]
     dir: 'helloworld'
 #  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
 #    entrypoint: 'bash'
