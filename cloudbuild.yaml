@@ -9,8 +9,9 @@ substitutions:
 steps:
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
     entrypoint: 'mvn'
-    args: ["-e -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}' --non-recursive exec:exec"]
+    args: ["-e org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version|grep -Ev '(^\[|Download\w+:)'"]
     dir: 'helloworld'
+
 #  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
 #    entrypoint: 'bash'
 #    args: ['cat _JAR_NAME']
