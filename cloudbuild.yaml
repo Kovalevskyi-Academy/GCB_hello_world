@@ -9,7 +9,7 @@ substitutions:
 steps:
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
     entrypoint: 'mvn'
-    args: ["-f helloworld/pom.xml -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}.jar' --non-recursive exec:exec"]
+    args: ["-e -f helloworld/pom.xml -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}' --non-recursive exec:exec"]
 
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
     entrypoint: 'bash'
