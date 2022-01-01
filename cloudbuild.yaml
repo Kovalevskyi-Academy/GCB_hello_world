@@ -1,7 +1,7 @@
 timeout: 120s
 
 options:
-  dynamic_substitutions: 'true'
+  dynamic_substitutions: true
   substitution_option: 'ALLOW_LOOSE'
 substitutions:
   _REGION: 'europe-docker.pkg.dev'
