@@ -9,12 +9,11 @@ substitutions:
 steps:
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
     entrypoint: 'bash'
-    args: ['echo',
-           "mvn -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}.jar' --non-recursive exec:exec",
-           ' > _JAR_NAME']
+    args: ["mvn -q -Dexec.executable=echo -Dexec.args='${project.artifactId}-${project.version}.jar' --non-recursive exec:exec > _JAR_NAME"]
+    dir: 'helloworld'
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
     entrypoint: 'bash'
-    args: ['cat _JAR_NAME']
+    args: ['cat helloworld/_JAR_NAME']
 #  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
 #    entrypoint: 'mvn'
 #    args: ['test']
