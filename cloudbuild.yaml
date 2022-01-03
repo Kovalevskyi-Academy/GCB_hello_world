@@ -11,7 +11,7 @@ steps:
   # собственно собираем джарник
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
     entrypoint: 'mvn'
-    args: [ 'package', '-Dmaven.test.skip=true' ]
+    args: ['package', '-Dmaven.test.skip=true']
     dir: 'helloworld'
   # пулим старый контейнер, если он есть
   - name: 'gcr.io/cloud-builders/docker'
@@ -20,12 +20,12 @@ steps:
   # билдим контейнер используя кэш спуленного ранее контейнера,
   # на основе указанного докерфайла
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build',
-            '-t', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:$SHORT_SHA',
-            '-t', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:latest',
-            '--cache-from', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:latest',
-            '-f', 'Dockerfile',
-            '.' ]
+    args: ['build',
+           '-t', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:$SHORT_SHA',
+           '-t', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:latest',
+           '--cache-from', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:latest',
+           '-f', 'Dockerfile',
+           '.']
 artifacts:
   objects:
     location: '${_ARTIFACT_REPO}'
