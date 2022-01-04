@@ -11,6 +11,9 @@ substitutions:
   _LATEST_TAG: '${_REGION}/${PROJECT_ID}/test-google-cloud-build/${REPO_NAME}:latest'
 
 steps:
+  # проверяем структуру директорий
+  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+    entrypoint: 'find'
   # собственно собираем джарник
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
     entrypoint: 'mvn'
