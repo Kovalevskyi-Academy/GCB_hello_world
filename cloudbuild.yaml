@@ -32,6 +32,7 @@ steps:
            '--cache-from', '${_LATEST_TAG}',
            '-f', 'Dockerfile',
            '.']
+
 artifacts:
   objects:
     location: '${_ARTIFACT_REPO}'
