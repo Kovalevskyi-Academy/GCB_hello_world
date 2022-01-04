@@ -16,14 +16,14 @@ steps:
   # пулим старый контейнер, если он есть
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
-    args: ['-c', 'docker pull ${_REGION}/$PROJECT_ID/rest-api/$REPO_NAME:latest || exit 0']
+    args: ['-c', 'docker pull ${_REGION}/$PROJECT_ID/test-google-cloud-build/$REPO_NAME:latest || exit 0']
   # билдим контейнер используя кэш спуленного ранее контейнера,
   # на основе указанного докерфайла
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build',
-           '-t', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:$SHORT_SHA',
-           '-t', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:latest',
-           '--cache-from', '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:latest',
+           '-t', '${_REGION}/${PROJECT_ID}/test-google-cloud-build/$REPO_NAME:$SHORT_SHA',
+           '-t', '${_REGION}/${PROJECT_ID}/test-google-cloud-build/$REPO_NAME:latest',
+           '--cache-from', '${_REGION}/${PROJECT_ID}/test-google-cloud-build/$REPO_NAME:latest',
            '-f', 'Dockerfile',
            '.']
 artifacts:
@@ -32,8 +32,8 @@ artifacts:
     paths: ['./helloworld/target/h*.jar']
 
 images:
-  - '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:$SHORT_SHA'
-  - '${_REGION}/${PROJECT_ID}/rest-api/$REPO_NAME:latest'
+  - '${_REGION}/${PROJECT_ID}/test-google-cloud-build/$REPO_NAME:$SHORT_SHA'
+  - '${_REGION}/${PROJECT_ID}/test-google-cloud-build/$REPO_NAME:latest'
 
 
 
