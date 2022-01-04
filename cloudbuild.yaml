@@ -11,9 +11,7 @@ substitutions:
   _LATEST_TAG: '${_REGION}/${PROJECT_ID}/test-google-cloud-build/${REPO_NAME}:latest'
 
 steps:
-  # проверяем структуру директорий
-  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
-    entrypoint: 'find'
+
   # собственно собираем джарник
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
     entrypoint: 'mvn'
@@ -30,6 +28,10 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args: ['-c', 'docker pull ${_LATEST_TAG} || exit 0']
+
+  # проверяем структуру директорий
+  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+    entrypoint: 'find'
 
   # билдим контейнер используя кэш спуленного ранее контейнера,
   # на основе указанного докерфайла
