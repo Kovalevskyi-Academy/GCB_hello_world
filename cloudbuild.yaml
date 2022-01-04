@@ -29,9 +29,9 @@ steps:
     entrypoint: 'bash'
     args: ['-c', 'docker pull ${_LATEST_TAG} || exit 0']
 
-  # проверяем структуру директорий
-  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
-    entrypoint: 'find'
+#  # проверяем структуру директорий
+#  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+#    entrypoint: 'find'
 
   # билдим контейнер используя кэш спуленного ранее контейнера,
   # на основе указанного докерфайла
