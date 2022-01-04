@@ -7,8 +7,8 @@ substitutions:
   _REGION: 'europe-docker.pkg.dev'
   _ARTIFACT_REPO: 'gs://prod-rest_cloudbuild/hello-world'
   # $REPO_NAME means GitHub's repo name. It will be container name
-  _COMMIT_TAG: '${_REGION}/${PROJECT_ID}/test-google-cloud-build/$REPO_NAME:$SHORT_SHA'
-  _LATEST_TAG: '${_REGION}/${PROJECT_ID}/test-google-cloud-build/$REPO_NAME:latest'
+  _COMMIT_TAG: '${_REGION}/${PROJECT_ID}/test-google-cloud-build/${REPO_NAME}:${SHORT_SHA}'
+  _LATEST_TAG: '${_REGION}/${PROJECT_ID}/test-google-cloud-build/${REPO_NAME}:latest'
 
 steps:
   # собственно собираем джарник
