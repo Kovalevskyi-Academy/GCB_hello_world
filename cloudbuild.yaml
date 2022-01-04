@@ -11,19 +11,27 @@ substitutions:
   _LATEST_TAG: '${_REGION}/${PROJECT_ID}/test-google-cloud-build/${REPO_NAME}:latest'
 
 steps:
-  # проверяем структуру директорий
-  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
-    entrypoint: 'find'
+
   # собственно собираем джарник
   - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
     entrypoint: 'mvn'
     args: ['package', '-Dmaven.test.skip=true']
     dir: 'helloworld'
+
+  # распаковываем джарник
+  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+    entrypoint: 'bash'
+    args: ['-c', 'mkdir -p target/dependency && (cd target/dependency; jar -xfv ../*.jar) && echo "jar unpack success"']
+    dir: 'helloworld'
+
   # пулим старый контейнер, если он есть
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args: ['-c', 'docker pull ${_LATEST_TAG} || exit 0']
-    dir: 'helloworld'
+
+#  # проверяем структуру директорий
+#  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+#    entrypoint: 'find'
 
   # билдим контейнер используя кэш спуленного ранее контейнера,
   # на основе указанного докерфайла
@@ -34,7 +42,6 @@ steps:
            '--cache-from', '${_LATEST_TAG}',
            '-f', 'Dockerfile',
            '.']
-    dir: 'helloworld'
 
 artifacts:
   objects:
