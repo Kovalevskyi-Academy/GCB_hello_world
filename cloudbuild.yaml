@@ -19,6 +19,13 @@ steps:
     entrypoint: 'mvn'
     args: ['package', '-Dmaven.test.skip=true']
     dir: 'helloworld'
+
+  # распаковываем джарник
+  - name: 'maven:3.8.4-eclipse-temurin-17-alpine'
+    entrypoint: 'bash'
+    args: ['-c', 'mkdir -p target/dependency && (cd target/dependency; jar -xfv ../*.jar) && echo "jar unpack success"']
+    dir: 'helloworld'
+
   # пулим старый контейнер, если он есть
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'

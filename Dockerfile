@@ -1,10 +1,16 @@
 FROM openjdk:17-alpine
 # Add and enable a new user. Because it is more secure.
-RUN addgroup -S textify && adduser -S api -G textify
-USER api:textify
+RUN addgroup -S testy && adduser -S api -G testy
+USER api:testy
 
-# Copy the jar to the production image from the builder stage.
-COPY ./helloworld/target/h*.jar /helloworld.jar
+# 1. тут мы просто копируем распакованое приложение
+# required a command `mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)`
+ARG DEPENDENCY=target/dependency
+COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY ${DEPENDENCY}/META-INF /app/META-INF
+COPY ${DEPENDENCY}/BOOT-INF/classes /app
 
 # Run the web service on container startup.
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/helloworld.jar"]
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom",
+            "-cp", "app:app/lib/*",
+            "com.example.helloworld.HelloWorldApplication"]
