@@ -23,7 +23,6 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args: ['-c', 'docker pull ${_LATEST_TAG} || exit 0']
-    dir: 'helloworld'
 
   # билдим контейнер используя кэш спуленного ранее контейнера,
   # на основе указанного докерфайла
@@ -34,7 +33,6 @@ steps:
            '--cache-from', '${_LATEST_TAG}',
            '-f', 'Dockerfile',
            '.']
-    dir: 'helloworld'
 
 artifacts:
   objects:
