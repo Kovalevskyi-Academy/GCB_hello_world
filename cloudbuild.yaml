@@ -6,6 +6,9 @@ options:
 substitutions:
   _REGION: 'europe-docker.pkg.dev'
   _ARTIFACT_REPO: 'gs://prod-rest_cloudbuild/hello-world'
+  # $REPO_NAME means GitHub's repo name. It will be container name
+  _COMMIT_TAG: '${_REGION}/${PROJECT_ID}/test-google-cloud-build/$REPO_NAME:$SHORT_SHA'
+  _LATEST_TAG: '${_REGION}/${PROJECT_ID}/test-google-cloud-build/$REPO_NAME:latest'
 
 steps:
   # собственно собираем джарник
@@ -16,14 +19,14 @@ steps:
   # пулим старый контейнер, если он есть
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
-    args: ['-c', 'docker pull ${_REGION}/$PROJECT_ID/test-google-cloud-build/$REPO_NAME:latest || exit 0']
+    args: ['-c', 'docker pull ${_LATEST_TAG} || exit 0']
   # билдим контейнер используя кэш спуленного ранее контейнера,
   # на основе указанного докерфайла
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build',
-           '-t', '${_REGION}/${PROJECT_ID}/test-google-cloud-build/$REPO_NAME:$SHORT_SHA',
-           '-t', '${_REGION}/${PROJECT_ID}/test-google-cloud-build/$REPO_NAME:latest',
-           '--cache-from', '${_REGION}/${PROJECT_ID}/test-google-cloud-build/$REPO_NAME:latest',
+           '-t', '${_COMMIT_TAG}',
+           '-t', '${_LATEST_TAG}',
+           '--cache-from', '${_LATEST_TAG}',
            '-f', 'Dockerfile',
            '.']
 artifacts:
@@ -32,8 +35,8 @@ artifacts:
     paths: ['./helloworld/target/h*.jar']
 
 images:
-  - '${_REGION}/${PROJECT_ID}/test-google-cloud-build/$REPO_NAME:$SHORT_SHA'
-  - '${_REGION}/${PROJECT_ID}/test-google-cloud-build/$REPO_NAME:latest'
+  - '${_COMMIT_TAG}'
+  - '${_LATEST_TAG}'
 
 
 
