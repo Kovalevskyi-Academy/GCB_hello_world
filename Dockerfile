@@ -5,7 +5,7 @@ USER api:testy
 
 # 1. тут мы просто копируем распакованое приложение
 # required a command `mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)`
-ARG DEPENDENCY=target/dependency
+ARG DEPENDENCY=helloworld/target/dependency
 COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY ${DEPENDENCY}/META-INF /app/META-INF
 COPY ${DEPENDENCY}/BOOT-INF/classes /app
