@@ -11,6 +11,6 @@ COPY ${DEPENDENCY}/META-INF /app/META-INF
 COPY ${DEPENDENCY}/BOOT-INF/classes /app
 
 # Run the web service on container startup.
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom",
-            "-cp", "app:app/lib/*",
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom -cp",
+            "app:app/lib/*",
             "com.example.helloworld.HelloWorldApplication"]
