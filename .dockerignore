@@ -1,4 +1,17 @@
+# Ignore files
+*.md
+*.iml
+.gitignore
+*.mk
+*.dockerfile
 Dockerfile
-.dockerignore
-*/src/
-*/.idea/
+
+# Ignore folders
+.git/
+.idea/
+tmp*
+src/
+target/
+
+# Folders not ignored
+! target/dependency/
