@@ -1,42 +1,46 @@
 ---
-apiVersion: "apps/v1"
-kind: "Deployment"
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: "hello-world"
-  namespace: "default"
+  name: hello-world
   labels:
-    app: "hello-world"
+    app: hello-world
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: "hello-world"
+      app: hello-world
   template:
     metadata:
       labels:
-        app: "hello-world"
+        app: hello-world
     spec:
       containers:
-      - name: "gcb-hello-world-sha256-1"
-        image: "europe-docker.pkg.dev/prod-rest/test-google-cloud-build/gcb_hello_world:latest"
+      - name: hello-world
+        image: europe-docker.pkg.dev/prod-rest/test-google-cloud-build/gcb_hello_world:latest
+        ports:
+          - containerPort: 8080
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 200m
+            memory: 150Mi
 ---
-apiVersion: "autoscaling/v2beta1"
-kind: "HorizontalPodAutoscaler"
+apiVersion: v1
+kind: Service
 metadata:
-  name: "hello-world-hpa-a6uw"
-  namespace: "default"
+  name: hello-world
   labels:
-    app: "hello-world"
+    app: hello-world
 spec:
-  scaleTargetRef:
-    kind: "Deployment"
-    name: "hello-world"
-    apiVersion: "apps/v1"
-  minReplicas: 1
-  maxReplicas: 5
-  metrics:
-  - type: "Resource"
-    resource:
-      name: "cpu"
-      targetAverageUtilization: 80
-
+  type: ClusterIP
+  selector:
+    app: hello-world
+  ports:
+    - protocol: TCP
+ #  - name: rest
+      port: 8080
+      targetPort: 8080
+---
