@@ -1,4 +1,7 @@
-FROM openjdk:17-alpine
+FROM openjdk:17-alpine3.14
+
+RUN apk del busybox --quiet
+
 # Add and enable a new user. Because it is more secure.
 RUN addgroup -S testy && adduser -S api -G testy
 USER api:testy
