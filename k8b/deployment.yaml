@@ -1,0 +1,42 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "hello-world"
+  namespace: "default"
+  labels:
+    app: "hello-world"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "hello-world"
+  template:
+    metadata:
+      labels:
+        app: "hello-world"
+    spec:
+      containers:
+      - name: "gcb-hello-world-sha256-1"
+        image: "europe-docker.pkg.dev/prod-rest/test-google-cloud-build/gcb_hello_world:latest"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "hello-world-hpa-a6uw"
+  namespace: "default"
+  labels:
+    app: "hello-world"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "hello-world"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
+
