@@ -4,6 +4,7 @@
 .gitignore
 *.mk
 *.dockerfile
+*.yaml
 Dockerfile
 
 # Ignore folders
@@ -12,6 +13,7 @@ Dockerfile
 tmp*
 src/
 target/
+k8b/
 
 # Folders not ignored
 ! target/dependency/
