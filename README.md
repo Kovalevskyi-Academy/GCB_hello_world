@@ -6,3 +6,4 @@ This is a test repo for learning Google Claud Build. Lets experimenting! :)
 
 ## Run build hello world in the cloud
 2. Try cloud-build in cloud, using CLI: `gcloud builds submit --config cloudbuild.yaml`
+
