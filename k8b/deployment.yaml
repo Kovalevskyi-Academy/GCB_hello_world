@@ -1,15 +1,19 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-world
-  labels:
-    app: hello-world
+#  labels:
+#    app: hello-world
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: hello-world
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -23,24 +27,9 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 100Mi
-          limits:
-            cpu: 200m
             memory: 150Mi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: hello-world
-  labels:
-    app: hello-world
-spec:
-  type: ClusterIP
-  selector:
-    app: hello-world
-  ports:
-    - protocol: TCP
- #  - name: rest
-      port: 8080
-      targetPort: 8080
----
+            ephemeral-storage: 100Mi
+          limits:
+            cpu: 300m
+            memory: 500Mi
+            ephemeral-storage: 200Mi
